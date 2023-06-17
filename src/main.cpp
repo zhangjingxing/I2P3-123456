@@ -8,7 +8,7 @@
 #include <cstdint>
 
 #include "config.hpp"
-
+using namespace std;
 
 /*Board Size, Don't change!*/
 #define BOARD_H 6
