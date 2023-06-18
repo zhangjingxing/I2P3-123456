@@ -11,11 +11,28 @@
  * 
  * @return int 
  */
+
+const int pieceValues[7] = {0, 1, 6, 7, 8, 20, 1000};
+
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
-}
+  auto self_board = this->board.board[this->player];
+  auto oppn_board = this->board.board[1 - this->player];
 
+  int self_score = 0;
+  int oppn_score = 0;
+
+  for (int i = 0; i < BOARD_H; i++) {
+    for (int j = 0; j < BOARD_W; j++) {
+      int self_piece = self_board[i][j];
+      int oppn_piece = oppn_board[i][j];
+      self_score += pieceValues[self_piece];
+      oppn_score += pieceValues[oppn_piece];
+    }
+  }
+  int score = oppn_score-self_score;
+  return score;
+}
 
 /**
  * @brief return next state after the move
@@ -212,10 +229,10 @@ void State::get_legal_actions(){
 }
 
 
-const char piece_table[2][7][5] = {
-  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
-  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
-};
+//const char piece_table[2][7][5] = {
+//  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
+//  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
+//};
 /**
  * @brief encode the output for command line output
  * 
