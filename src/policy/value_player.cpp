@@ -13,7 +13,7 @@
  * @return Move 
  */
 
-Move value_player::get_move(State *state, int depth){
+Move value_player::get_move(State *state){
   if(!state->legal_actions.size())
     state->get_legal_actions();
   
