@@ -10,6 +10,5 @@
 class minimax_player{
 public:
   static Move get_move(State *state, int depth);
-  private:
   static int minimax(State* state, int depth, bool maximizingPlayer, int alpha, int beta);
 };
