@@ -11,7 +11,7 @@ using namespace std;
  * @param depth You may need this for other policy
  * @return Move 
  */
-int alphabeta::minimax(State* node, int depth, int alpha, int beta, bool maximizingPlayer)
+int alphabeta::pruning(State* node, int depth, int alpha, int beta, bool maximizingPlayer)
 {
   if(depth == 0 ||node->legal_actions.empty())
   {
@@ -27,7 +27,7 @@ int alphabeta::minimax(State* node, int depth, int alpha, int beta, bool maximiz
     for(const auto& act : node->legal_actions)
     {
       State *childNode = node->next_state(act);
-      int value = minimax(childNode, depth-1, alpha, beta, false);
+      int value = pruning(childNode, depth-1, alpha, beta, false);
       bestValue = max(bestValue, value);
       alpha = max(alpha, bestValue);
       if(alpha >= beta)
@@ -48,7 +48,7 @@ int alphabeta::minimax(State* node, int depth, int alpha, int beta, bool maximiz
     for(const auto& act : node->legal_actions)
     {
       State *childNode = node->next_state(act);
-      int value = minimax(childNode, depth-1, alpha, beta, true);
+      int value = pruning(childNode, depth-1, alpha, beta, true);
       bestValue = min(bestValue, value);
       beta = min(beta, bestValue);
       if(alpha >= beta)
@@ -75,7 +75,7 @@ Move alphabeta::get_move(State *state, int depth)
   for(const auto &act : state->legal_actions)
   {
     State* childState = state->next_state(act);
-    int value = minimax(childState, depth-1, INT_MIN, INT_MAX, false);
+    int value = pruning(childState, depth-1, INT_MIN, INT_MAX, false);
 
     if (value > bestValue)
     {
@@ -93,7 +93,7 @@ Move alphabeta::get_move(State *state, int depth)
     for(const auto &act : state->legal_actions)
   {
     State* childState = state->next_state(act);
-    int value = minimax(childState, depth-1, INT_MIN, INT_MAX, true);
+    int value = pruning(childState, depth-1, INT_MIN, INT_MAX, true);
 
     if (value < bestValue)
     {
