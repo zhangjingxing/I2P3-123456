@@ -16,8 +16,8 @@ const int pieceValues[7] = {0, 1, 6, 7, 8, 20, 1000};
 
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  auto self_board = this->board.board[0];
-  auto oppn_board = this->board.board[1];
+  auto self_board = this->board.board[this->player];
+  auto oppn_board = this->board.board[1-this->player];
 
   int self_score = 0;
   int oppn_score = 0;
