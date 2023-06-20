@@ -30,7 +30,7 @@ int State::evaluate(){
       oppn_score += pieceValues[oppn_piece];
     }
   }
-  int score = self_score-oppn_score;
+  int score = oppn_score-self_score;
   return score;
 }
 
